@@ -1,0 +1,302 @@
+@import 'https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap';
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans:
+    'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif:
+    'Noto Serif SC', 'Newsreader', 'Songti SC', 'SimSun', ui-serif, Georgia,
+    serif;
+  --font-mono:
+    ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* 草稿纸米白底 */
+  --background: oklch(0.985 0.008 90);
+  --foreground: oklch(0.23 0.015 260);
+
+  --card: oklch(0.995 0.005 90);
+  --card-foreground: oklch(0.23 0.015 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.23 0.015 260);
+
+  /* 黑板深绿 */
+  --primary: oklch(0.36 0.05 150);
+  --primary-foreground: oklch(0.97 0.012 90);
+
+  --secondary: oklch(0.95 0.012 90);
+  --secondary-foreground: oklch(0.3 0.02 260);
+
+  --muted: oklch(0.94 0.01 85);
+  --muted-foreground: oklch(0.5 0.015 260);
+
+  /* 黄油色提示 */
+  --accent: oklch(0.93 0.06 80);
+  --accent-foreground: oklch(0.33 0.06 60);
+
+  /* 红笔朱砂 */
+  --destructive: oklch(0.55 0.18 35);
+
+  --border: oklch(0.86 0.015 85);
+  --input: oklch(0.86 0.015 85);
+  --ring: oklch(0.55 0.05 150);
+
+  --chart-1: oklch(0.45 0.08 150);
+  --chart-2: oklch(0.62 0.14 50);
+  --chart-3: oklch(0.55 0.18 35);
+  --chart-4: oklch(0.7 0.1 90);
+  --chart-5: oklch(0.5 0.06 250);
+
+  --sidebar: oklch(0.3 0.04 150);
+  --sidebar-foreground: oklch(0.95 0.012 90);
+  --sidebar-primary: oklch(0.93 0.06 80);
+  --sidebar-primary-foreground: oklch(0.3 0.05 60);
+  --sidebar-accent: oklch(0.4 0.04 150);
+  --sidebar-accent-foreground: oklch(0.97 0.012 90);
+  --sidebar-border: oklch(0.4 0.04 150);
+  --sidebar-ring: oklch(0.93 0.06 80);
+
+  /* 自定义 tutor 色板（在组件中通过 var(--xxx) 引用） */
+  --ink: oklch(0.23 0.015 260);
+  --ink-soft: oklch(0.5 0.015 260);
+  --paper: oklch(0.985 0.008 90);
+  --paper-grid: oklch(0.92 0.015 85);
+  --chalk: oklch(0.97 0.012 90);
+  --blackboard: oklch(0.36 0.05 150);
+  --blackboard-2: oklch(0.43 0.04 150);
+  --red-pen: oklch(0.55 0.18 35);
+  --red-pen-soft: oklch(0.95 0.04 35);
+  --correct: oklch(0.55 0.14 145);
+  --hint: oklch(0.62 0.13 70);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+  html {
+    color-scheme: light;
+  }
+}
+
+/* 草稿纸方格背景 */
+.grid-paper {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--paper-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+
+/* 黑板纹理 */
+.chalkboard {
+  background: linear-gradient(
+      135deg,
+      var(--blackboard) 0%,
+      var(--blackboard-2) 100%
+    ),
+    var(--blackboard);
+  color: var(--chalk);
+}
+
+/* 草稿本卡片 */
+.paper-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.02),
+    0 2px 8px -4px rgba(31, 41, 55, 0.08);
+  border-radius: 0.625rem;
+  position: relative;
+}
+.paper-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--blackboard);
+  opacity: 0.85;
+}
+
+/* 字体角色 */
+.font-serif-cn {
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+}
+.font-sans-cn {
+  font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+}
+
+/* 打字机光标 */
+.typing-cursor::after {
+  content: '▋';
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--blackboard);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 对勾描边动画 */
+.check-draw path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: draw 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 红笔斜划动画 */
+.cross-draw path {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: draw 0.26s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+/* 卡片悬停 */
+.hover-rise {
+  transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.hover-rise:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.02),
+    0 8px 24px -8px rgba(31, 41, 55, 0.18);
+}
+
+/* 虚线分隔（黑板上的横线感） */
+.dashed-line {
+  border-bottom: 1px dashed currentColor;
+  opacity: 0.35;
+}
+
+/* markdown 内容样式 */
+.tutor-markdown {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink);
+}
+.tutor-markdown p {
+  margin: 0.6em 0;
+}
+.tutor-markdown h1,
+.tutor-markdown h2,
+.tutor-markdown h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 700;
+  margin: 0.8em 0 0.4em;
+}
+.tutor-markdown h1 {
+  font-size: 1.4em;
+}
+.tutor-markdown h2 {
+  font-size: 1.2em;
+}
+.tutor-markdown h3 {
+  font-size: 1.05em;
+}
+.tutor-markdown ul,
+.tutor-markdown ol {
+  padding-left: 1.4em;
+  margin: 0.4em 0;
+}
+.tutor-markdown li {
+  margin: 0.2em 0;
+}
+.tutor-markdown code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  background: var(--muted);
+  padding: 0.05em 0.4em;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+.tutor-markdown strong {
+  color: var(--blackboard);
+}
+.tutor-markdown blockquote {
+  border-left: 3px solid var(--blackboard);
+  padding-left: 0.8em;
+  color: var(--ink-soft);
+  margin: 0.6em 0;
+}
+
+/* KaTeX 块级公式 */
+.katex-block {
+  margin: 0.8em 0;
+  padding: 0.4em 0.6em;
+  text-align: center;
+  overflow-x: auto;
+}
+.katex-block .katex-display {
+  margin: 0;
+}
+.katex {
+  font-size: 1.05em;
+  color: var(--ink);
+}
+.tutor-markdown .katex {
+  font-size: 1em;
+}
+/* 行内公式与文本对齐 */
+.katex-html {
+  white-space: nowrap;
+}
