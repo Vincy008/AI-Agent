@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ done: true })}\n\n`));
       } catch (err) {
         // 无扣子运行时凭证时，降级为演示文案，避免 HR 看到报错
-        const demoChunks = DEMO_REPLY.match(/.{1,12}/gs) ?? [DEMO_REPLY];
+        const demoChunks = DEMO_REPLY.match(/[\s\S]{1,12}/g) ?? [DEMO_REPLY];
         for (const piece of demoChunks) {
           controller.enqueue(
             encoder.encode(`data: ${JSON.stringify({ delta: piece })}\n\n`),
